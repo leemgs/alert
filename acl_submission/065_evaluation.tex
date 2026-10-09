@@ -14,11 +14,11 @@ We address six research questions: triage-label agreement (RQ1), report quality 
 
 \subsection{RQ1: Triage-Label Agreement}
 
-Table~\ref{tab:human_only_main} reports severity-label agreement on the human-adjudicated subset ($n{=}82$), our primary circularity check. ALERT reaches 0.79 macro F1 versus 0.75 for the iteration-matched self-refinement baseline (B5). The paired-bootstrap estimate of the difference is $\Delta$F1 ${=}{+}0.04$ with 95\% CI $[{-}0.09,{+}0.18]$ (case-level resampling; the interval includes zero), so we treat the gap as modest and directional rather than statistically established on this split. Marginal 95\% half-widths are about $\pm0.09$--$0.10$, consistent with $n{=}82$. On the full held-out test set (including retained pre-labels; last column and Table~\ref{tab:rq1}) the same ordering holds.
+Table~\ref{tab:human_only_main} reports severity-label agreement on the human-adjudicated subset ($n{=}82$), our primary circularity check. ALERT reaches 0.79 macro F1 versus 0.75 for the iteration-matched self-refinement baseline (B5). The paired-bootstrap estimate of the difference is $\Delta$F1 ${=}{+}0.04$ with 95\% CI $[{-}0.09,{+}0.18]$ (case-level resampling; the interval includes zero), so we treat the gap as modest and directional rather than statistically established on this split. On the full held-out test set (including retained pre-labels; last column and Table~\ref{tab:rq1}) the same ordering holds.
 
 \begin{table}[t]
 \centering
-\caption{Macro severity-label agreement. F1/P/R are on the human-adjudicated test subset ($n{=}82$; primary result). $\pm$ denotes half-widths of 95\% percentile bootstrap CIs for each system's \emph{marginal} macro-F1 (case-level resampling, $10{,}000$ resamples). The paired ALERT--B5 $\Delta$F1 is ${+}0.04$ (95\% CI $[{-}0.09,{+}0.18]$). The last column is F1 on the full held-out test set, which includes retained pre-labels (Table~\ref{tab:rq1}).}
+\caption{Macro severity-label agreement. F1/P/R are on the human-adjudicated test subset ($n{=}82$; primary result). $\pm$ denotes half-widths of 95\% percentile bootstrap CIs for each system's \emph{marginal} macro-F1 (case-level resampling, $10{,}000$ resamples). The last column is F1 on the full held-out test set, which includes retained pre-labels (Table~\ref{tab:rq1}).}
 \label{tab:human_only_main}
 \small
 \setlength{\tabcolsep}{3pt}
@@ -49,7 +49,7 @@ Because temporal precedent reasoning is the central claim, Table~\ref{tab:tempor
 
 \begin{table}[t]
 \centering
-\caption{Temporal precedent-graph ablation (main claim). Both mechanisms of Eq.~\eqref{eq:tpg_score} are removed in sequence; the bottom row recovers flat semantic similarity. Stale-cite measures citations to already-closed precedent ($t_q\!\ge\!e_v$). Full-vs-flat $\Delta$F1 was significance-tested on test pairs (paired bootstrap 95\% CI $[0.03,0.10]$, $p{<}0.001$).}
+\caption{Temporal precedent-graph ablation (main claim). Both mechanisms of Eq.~\eqref{eq:tpg_score} are removed in sequence; the bottom row recovers flat semantic similarity. Stale-cite measures citations to already-closed precedent ($t_q\!\ge\!e_v$).}
 \label{tab:temporal_ablation}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -93,7 +93,7 @@ Component ablations for the agentic loop confirm each part contributes: removing
 
 \subsection{RQ5: Product--Litigation Risk Entailment}
 
-PLRE is evaluated on anonymized AI product specs spanning five archetypes and 312 product-mapping cases, so it is an initial benchmark. It comprises 1{,}856 attribute--theory--date pairs (28.4\% positive; 19.7\% stale-authority distractors), with PLRE-specific inter-annotator agreement $\kappa=0.71$; Tables~\ref{tab:temporal_ablation} and~\ref{tab:plre_external} report pair-level results on this full set (test-split pairs used for bootstrap CIs). In Table~\ref{tab:plre_external}, ALERT reaches 0.78 F1, 5--13 points above the external baselines; removing temporal gating costs about 6--7 points (decomposed in Table~\ref{tab:temporal_ablation}; paired 95\% CI of full-vs-flat $\Delta$F1 $[0.03,0.10]$). On the subset that excludes stale-authority distractors ($n{=}1{,}193$ test pairs), the ALERT--flat gap shrinks to $\Delta$F1 ${=}{+}0.03$ (95\% CI $[{-}0.01,{+}0.07]$), so part of the gating gain is attributable to rejecting those distractors while a residual advantage remains on non-distractor pairs. Because labels encode temporal validity, we read PLRE as directional evidence for the validity-gated formulation rather than as coverage of all AI-product litigation.
+PLRE is evaluated on anonymized AI product specs spanning five archetypes and 312 product-mapping cases, so it is an initial benchmark. It comprises 1{,}856 attribute--theory--date pairs (28.4\% positive; 19.7\% stale-authority distractors), with PLRE-specific inter-annotator agreement $\kappa=0.71$; Tables~\ref{tab:temporal_ablation} and~\ref{tab:plre_external} report pair-level results on this full set (test-split pairs used for bootstrap CIs). In Table~\ref{tab:plre_external}, ALERT reaches 0.78 F1, 5--13 points above the external baselines; removing temporal gating costs about 6--7 points (Table~\ref{tab:temporal_ablation}). On the subset that excludes stale-authority distractors ($n{=}1{,}193$ test pairs), the ALERT--flat gap shrinks to $\Delta$F1 ${=}{+}0.03$ (95\% CI $[{-}0.01,{+}0.07]$), so part of the gating gain is attributable to rejecting those distractors while a residual advantage remains on non-distractor pairs. Because labels encode temporal validity, we read PLRE as directional evidence for the validity-gated formulation rather than as coverage of all AI-product litigation.
 
 \begin{table}[t]
 \centering
