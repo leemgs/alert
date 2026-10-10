@@ -28,12 +28,12 @@ Table~\ref{tab:human_only_main} reports severity-label agreement on the human-ad
  & \multicolumn{3}{c|}{\textbf{Human-adjudicated}} & \textbf{Full} \\
 \textbf{System} & \textbf{F1} & \textbf{P} & \textbf{R} & \textbf{F1} \\
 \midrule
-B1 Rule-Based        & $0.55{\pm}0.11$ & $0.55{\pm}0.11$ & $0.56{\pm}0.11$ & $0.60$ \\
-B2 Single-Pass LLM   & $0.70{\pm}0.10$ & $0.70{\pm}0.10$ & $0.71{\pm}0.10$ & $0.71$ \\
+B1 Rule-Based        & $0.55{\pm}0.11$ & $0.55{\pm}0.11$ & $0.56{\pm}0.11$ & $0.62$ \\
+B2 Single-Pass LLM   & $0.70{\pm}0.10$ & $0.70{\pm}0.10$ & $0.71{\pm}0.10$ & $0.72$ \\
 B3 RAG-only          & $0.72{\pm}0.10$ & $0.72{\pm}0.10$ & $0.72{\pm}0.10$ & $0.74$ \\
-B4 Single-Agent      & $0.74{\pm}0.10$ & $0.74{\pm}0.10$ & $0.74{\pm}0.10$ & $0.75$ \\
-B5 Self-Refinement   & $0.75{\pm}0.10$ & $0.75{\pm}0.10$ & $0.75{\pm}0.10$ & $0.76$ \\
-\textbf{ALERT Full}  & $\mathbf{0.79{\pm}0.09}$ & $\mathbf{0.79{\pm}0.09}$ & $\mathbf{0.80{\pm}0.09}$ & $\mathbf{0.80}$ \\
+B4 Single-Agent      & $0.74{\pm}0.10$ & $0.74{\pm}0.10$ & $0.74{\pm}0.10$ & $0.76$ \\
+B5 Self-Refinement   & $0.75{\pm}0.10$ & $0.75{\pm}0.10$ & $0.75{\pm}0.10$ & $0.77$ \\
+\textbf{ALERT Full}  & $\mathbf{0.79{\pm}0.09}$ & $\mathbf{0.79{\pm}0.09}$ & $\mathbf{0.80{\pm}0.09}$ & $\mathbf{0.81}$ \\
 \bottomrule
 \end{tabular}%
 }
@@ -45,7 +45,7 @@ Two blinded legal specialists rated the reports of ALERT and B2--B5 for the same
 
 \subsection{RQ3: Agentic Loop and Temporal Graph Ablations}
 
-Because temporal precedent reasoning is the central claim, Table~\ref{tab:temporal_ablation} decomposes validity-interval gating and treatment-edge weighting. Removing treatment weighting and then interval gating each degrades PLRE F1. The full-vs-flat gap is $\Delta$F1 ${=}{+}0.07$ on the test pairs (paired bootstrap 95\% CI $[0.03,0.10]$, $p{<}0.001$); the intermediate weighting step is reported without a separate interval and should be read as directional. Stale citations rise from about 1--4\% under full gating to higher rates under flat retrieval. Flat retrieval ranks lexically close but already-closed authority above operative authority, changing which evidence reaches the generator; this is the paper's main methodological result.
+Because temporal precedent reasoning is the central claim, Table~\ref{tab:temporal_ablation} decomposes validity-interval gating and treatment-edge weighting. Removing treatment weighting and then interval gating each degrades PLRE F1. The full-vs-flat gap is $\Delta$F1 ${=}{+}0.07$ on the test pairs (paired bootstrap 95\% CI $[0.03,0.10]$, $p{<}0.001$); the intermediate weighting step is reported without a separate interval and should be read as directional. Stale citations rise from 4.1\% under full gating to 12.7\% under flat retrieval. Flat retrieval ranks lexically close but already-closed authority above operative authority, changing which evidence reaches the generator; this is the paper's main methodological result.
 
 \begin{table}[t]
 \centering
@@ -59,8 +59,8 @@ Because temporal precedent reasoning is the central claim, Table~\ref{tab:tempor
 \textbf{Variant} & \textbf{PLRE F1} & \textbf{$\Delta$F1} & \textbf{Stale-cite \%} \\
 \midrule
 \textbf{ALERT (Full: gating + weighting)} & 0.78 & --- & 4.1 \\
-$-$ treatment weighting $w(\cdot)$        & 0.75 & $-3$ & 7.8 \\
-$-$ interval gating (flat similarity)     & 0.72 & $-6$ & 12.7 \\
+$-$ treatment weighting $w(\cdot)$        & 0.75 & $-0.03$ & 7.8 \\
+$-$ interval gating (flat similarity)     & 0.72 & $-0.06$ & 12.7 \\
 \bottomrule
 \end{tabular}%
 }
@@ -79,11 +79,11 @@ Table~\ref{tab:edge_sensitivity} measures how negative-treatment errors propagat
 \toprule
 \textbf{Setting} & \textbf{Eff.\ miss} & \textbf{PLRE F1} & \textbf{$\Delta$F1} & \textbf{Stale-cite \%} \\
 \midrule
-Gold negative edges               & 0\%          & 0.80 & +2 & 3.7 \\
+Gold negative edges               & 0\%          & 0.80 & $+0.02$ & 3.7 \\
 Extractor output                  & $\approx$23\% & 0.78 & --- & 4.1 \\
-\,+ mask 10\% of extracted        & $\approx$31\% & 0.76 & $-2$ & 6.2 \\
-\,+ mask 23\% of extracted        & $\approx$41\% & 0.74 & $-4$ & 8.9 \\
-\,+ mask 30\% of extracted        & $\approx$46\% & 0.72 & $-6$ & 11.3 \\
+\,+ mask 10\% of extracted        & $\approx$31\% & 0.76 & $-0.02$ & 6.2 \\
+\,+ mask 23\% of extracted        & $\approx$41\% & 0.74 & $-0.04$ & 8.9 \\
+\,+ mask 30\% of extracted        & $\approx$46\% & 0.72 & $-0.06$ & 11.3 \\
 \bottomrule
 \end{tabular}%
 }
